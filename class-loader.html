@@ -1,5 +1,21 @@
 <!-- 
     Takes a dependency definition inside of a class and loads the "components" via a semi-absolute mechanism.
+
+    Provide a class with the following static property: 
+
+            class MyElement extends ClassLoader(Polymer.Element) {
+                static get is() {
+                    return 'my-element';
+                }
+
+                static get dependencies() {
+                    return [
+                        "app-model",
+                        "app-view",
+                        "app-controller"
+                    ]
+                }
+            }
  -->
 <script>
     (function () {
