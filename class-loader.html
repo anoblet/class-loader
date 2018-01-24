@@ -1,0 +1,26 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="class-loader">
+    <template>
+        <style>
+            :host {
+            }
+        </style>
+    </template>
+    <script>
+        class ClassLoader extends Polymer.Element {
+            static get is() {
+                return 'class-loader';
+            }
+
+            static get properties() {
+                return {}
+            }
+
+            static get observers() {
+                return []
+            }
+        }
+        window.customElements.define(ClassLoader.is, ClassLoader);
+    </script>
+</dom-module>
