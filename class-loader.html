@@ -8,7 +8,7 @@
                     return 'my-element';
                 }
 
-                static get dependencies() {
+                static get depends() {
                     return [
                         "app-model",
                         "app-view",
@@ -36,6 +36,18 @@
                     "element": "app-controller",
                     "source": "src/app/app-controller.html"
                 },
+                {
+                    "element": "global-styles",
+                    "source": "src/styles/global-styles.html"
+                },
+                {
+                    "element": "flex-styles",
+                    "source": "src/styles/flex-styles.html"
+                },
+                {
+                    "element": "app-styles",
+                    "source": "src/styles/app-styles.html"
+                },
             ];
 
 
@@ -43,21 +55,32 @@
             return class extends superClass {
                 constructor() {
                     super();
+                    console.log(this.constructor.dependencies);
                     // let dependencies = this.constructor.dependencies;
+                    let dependencies;
+                    dependencies = this.constructor.dependencies;
                     // Shortcut
-                    let dependencies = this.constructor.depends;
-                    
-                    
-                    for(let i=0; i < dependencies.length; i++) {
-                        let dependency = dependencies[i];
-                        for(let index in ClassMap) {
-                            let source = ClassMap[index].source;
-                            let element = ClassMap[index].element;
-                            if(element == dependency) {
-                                Polymer.importHref(this.resolveUrl(Polymer.rootPath + source));
+                    if(this.constructor.depends)
+                    {
+                        let dependencies = this.constructor.depends;
+                    }
+                    else if(this.constructor.dependencies) {
+                        let dependencies = this.constructor.dependencies;
+                    }
+                    if(dependencies) {
+                        console.log("Dependencies are present.");
+                        for(let i=0; i < dependencies.length; i++) {
+                            let dependency = dependencies[i];
+                            for(let index in ClassMap) {
+                                let source = ClassMap[index].source;
+                                let element = ClassMap[index].element;
+                                if(element == dependency) {
+                                    console.log("Loading dependency: " + dependency);
+                                    Polymer.importHref(this.resolveUrl(Polymer.rootPath + source));
+                                }
                             }
-                        }
 
+                        }
                     }
                 }
             }
