@@ -37,7 +37,7 @@
                         for(let index in ClassMap) {
                             let source = ClassMap[index].source;
                             let element = ClassMap[index].element;
-                            if(dependency == element) {
+                            if(element == dependency) {
                                 Polymer.importHref(this.resolveUrl(Polymer.rootPath + source));
                             }
                         }
