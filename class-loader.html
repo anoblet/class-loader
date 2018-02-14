@@ -46,17 +46,15 @@
                 },
                 {
                     "element": "app-styles",
-                    "source": "src/styles/app-styles.html"
+                    "source": "src/app/styles/app-styles.html"
                 },
             ];
 
 
         ClassLoader = function (superClass) {
             return class extends superClass {
-                constructor() {
-                    super();
-                    console.log(this.constructor.dependencies);
-                    // let dependencies = this.constructor.dependencies;
+                ready() {
+                    super.ready();
                     let dependencies;
                     dependencies = this.constructor.dependencies;
                     dependencies = this.constructor.depends;
@@ -64,10 +62,10 @@
                     // Shortcut
                     if(this.constructor.depends)
                     {
-                        let dependencies = this.constructor.depends;
+                        // let dependencies = this.constructor.depends;
                     }
                     else if(this.constructor.dependencies) {
-                        let dependencies = this.constructor.dependencies;
+                        // let dependencies = this.constructor.dependencies;
                     }
                     if(dependencies) {
                         console.log("Dependencies are present.");
@@ -79,11 +77,17 @@
                                 if(element == dependency) {
                                     console.log("Loading dependency: " + dependency);
                                     Polymer.importHref(this.resolveUrl(Polymer.rootPath + source));
+                                    // dependencies[index].loaded = true;
+                                    console.log(dependency + " loaded.");
                                 }
                             }
 
                         }
                     }
+                }
+
+                static get depends() {
+                    
                 }
             }
         }
